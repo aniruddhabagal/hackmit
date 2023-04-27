@@ -25,15 +25,17 @@ function Login() {
       </div>
       <div className="right">
         <div className="logo"></div>
-        <input type="text" placeholder=" Username" />
-        <input type="password" placeholder=" Password" />
-        <input
-          className="login-btn"
-          type="submit"
-          value="Login"
-          onClick={navigateToDash}
-        />
-        <Log className="login-btn" onClick={navigateToDash} />
+        <form>
+          <input type="text" placeholder=" Username*" required/>
+          <input type="password" placeholder=" Password*" required />
+          <input
+            className="login-btn"
+            type="submit"
+            value="Login"
+            onClick={navigateToDash}
+          />
+          <Log className="login-btn" onClick={navigateToDash} />
+        </form>
       </div>
     </div>
   );

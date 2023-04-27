@@ -27,7 +27,7 @@
 
 .btn-choose {
   position: absolute;
-  top: 92%;
+  top: 88%;
   color: white;
   background-color: rgba(76, 31, 181, 0.808);
   border-radius: 20px;
@@ -38,6 +38,7 @@
 
 .btn-choose:hover {
   background-color: rgba(76, 31, 181);
+  font-weight: bold;
 }
 
 .tut {

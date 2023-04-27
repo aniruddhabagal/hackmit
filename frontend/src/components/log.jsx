@@ -21,7 +21,7 @@ function Log() {
       <GoogleLogin
         className="login-btn"
         clientId={clientId}
-        buttonText="Login"
+        buttonText="Login with your Google Account"
         onSuccess={onSuccess}
         onFailure={onFailure}
         cookiePolicy={"single_host_origin"}
