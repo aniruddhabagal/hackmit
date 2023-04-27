@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import "./tutorial.css";
 const data = {
   0: [
     {
@@ -165,21 +166,83 @@ function Tutorial() {
   }, []);
   return (
     <>
-      <div>
+      <div className="tut-container">
+        <div class="logo-holder">
+          <div class="bg"></div>
+          <div class="bar"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill2"></div>
+          <div class="bar fill3"></div>
+          <div class="bar fill4"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill5"></div>
+          <div class="bar fill6"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill2"></div>
+          <div class="bar fill3"></div>
+          <div class="bar fill4"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill5"></div>
+          <div class="bar fill6"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill2"></div>
+          <div class="bar fill3"></div>
+          <div class="bar fill4"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill5"></div>
+          <div class="bar fill6"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill2"></div>
+          <div class="bar fill3"></div>
+          <div class="bar fill4"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill5"></div>
+          <div class="bar fill6"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill2"></div>
+          <div class="bar fill3"></div>
+          <div class="bar fill4"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill5"></div>
+          <div class="bar fill6"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill2"></div>
+          <div class="bar fill3"></div>
+          <div class="bar fill4"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill5"></div>
+          <div class="bar fill6"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill2"></div>
+          <div class="bar fill3"></div>
+          <div class="bar fill4"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill5"></div>
+          <div class="bar fill6"></div>
+
+          <div class="bar"></div>
+        </div>
         {loaddata && (
           <div>
-            {data2[index].sentence}
+            <div className="question">Q. {data2[index].sentence}</div>
             {data2[index].pos.map((s, index) => (
-              <div key={index}>
-                {s.word} : {s.tag}
+              <div className="word-ans" key={index}>
+                <span className="word-ques">{s.word}</span> :{" "}
+                <span className="ans-ques">{s.tag}</span>
               </div>
             ))}
           </div>
         )}
         {!(index == 19) && (
-          <button onClick={() => setindex(index + 1)}>NEXT </button>
+          <button className="btn-nxt" onClick={() => setindex(index + 1)}>
+            NEXT{" "}
+          </button>
         )}
-        {index == 19 && <button onClick={(e) => goquiz(e)}>Take Quiz </button>}
+        {index == 19 && (
+          <button className="btn-test" onClick={(e) => goquiz(e)}>
+            Take Quiz{" "}
+          </button>
+        )}
       </div>
     </>
   );
