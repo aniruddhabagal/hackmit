@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 function Quiz() {
 
   const [rowoptions , setrow] = useState([]);
@@ -7,6 +8,8 @@ function Quiz() {
   const [isRunning, setIsRunning] = useState(false);
   const [result , setresult] = useState([]);
   const [corr , setcorr] = useState(0);
+  const [loaddata , setload] = useState(false);
+  const [data2 , setdata2] =useState([]);
 
   useEffect(() => {
     let intervalId;
@@ -17,6 +20,25 @@ function Quiz() {
     return () => clearInterval(intervalId);
   }, [isRunning, time]);
 
+  const ld = async ()=>{
+    try {
+      const res = await axios.get("http://192.168.0.135:8990/tutorial/20");
+      console.log(res.data.data);
+      setdata2(res.data.data);
+      setload(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  useEffect(()=>{
+    if(!loaddata){
+      ld();
+    }
+  },[])
+
+  var total;
   // Hours calculation
   const hours = Math.floor(time / 360000);
 
@@ -38,209 +60,7 @@ function Quiz() {
     console.log(seconds.toString());
     setTime(0);
   };
-
-  const data2 = 
-    [
-      {
-          "lineId": 1,
-          "sentence": "She ate an apple.",
-          "pos": [
-              {
-                  "word": "She",
-                  "tag": "PRP",
-                  "_id": "644a7c1c7530edafff4e6c4a"
-              },
-              {
-                  "word": "ate",
-                  "tag": "VBD",
-                  "_id": "644a7c1c7530edafff4e6c4b"
-              },
-              {
-                  "word": "an",
-                  "tag": "DT",
-                  "_id": "644a7c1c7530edafff4e6c4c"
-              },
-              {
-                  "word": "apple",
-                  "tag": "NN",
-                  "_id": "644a7c1c7530edafff4e6c4d"
-              },
-              {
-                  "word": ".",
-                  "tag": ".",
-                  "_id": "644a7c1c7530edafff4e6c4e"
-              }
-          ],
-          "__v": 0
-      },
-      {
-          "lineId": 1,
-          "sentence": "She ate an apple.",
-          "pos": [
-              {
-                  "word": "She",
-                  "tag": "PRP",
-                  "_id": "644a7c6635d5b00fcf5dc764"
-              },
-              {
-                  "word": "ate",
-                  "tag": "VBD",
-                  "_id": "644a7c6635d5b00fcf5dc765"
-              },
-              {
-                  "word": "an",
-                  "tag": "DT",
-                  "_id": "644a7c6635d5b00fcf5dc766"
-              },
-              {
-                  "word": "apple",
-                  "tag": "NN",
-                  "_id": "644a7c6635d5b00fcf5dc767"
-              },
-              {
-                  "word": ".",
-                  "tag": ".",
-                  "_id": "644a7c6635d5b00fcf5dc768"
-              }
-          ],
-          "__v": 0
-      }
-  ];
-  const data = {
-    0: [
-    {
-    word: "dog",
-    part: "verb",
-    },
-    {
-      word: "cat",
-      part: "verb",
-      },
-      {
-        word: "fff",
-        part: "verb",
-        },
-        {
-          word: "ggg",
-          part: "verb",
-          },
-          {
-            word: "hh",
-            part: "verb",
-            },
-    ],
-    1: [
-      {
-      word: "do1g",
-      part: "verb",
-      },
-      {
-        word: "cat1",
-        part: "verb",
-        },
-        {
-          word: "fff1",
-          part: "verb",
-          },
-          {
-            word: "ggg1",
-            part: "verb",
-            },
-            {
-              word: "hh1",
-              part: "verb",
-              },
-      ],
-      2: [
-        {
-        word: "dog2",
-        part: "verb",
-        },
-        {
-          word: "cat2",
-          part: "verb",
-          },
-          {
-            word: "fff2",
-            part: "verb",
-            },
-            {
-              word: "gg2g",
-              part: "verb",
-              },
-              {
-                word: "hh2",
-                part: "verb",
-                },
-        ], 
-        3: [
-          {
-          word: "dog2",
-          part: "verb",
-          },
-          {
-            word: "cat2",
-            part: "verb",
-            },
-            {
-              word: "fff2",
-              part: "verb",
-              },
-              {
-                word: "gg2g",
-                part: "verb",
-                },
-                {
-                  word: "hh2",
-                  part: "verb",
-                  },
-          ],
-          4: [
-            {
-            word: "dog2",
-            part: "verb",
-            },
-            {
-              word: "cat2",
-              part: "verb",
-              },
-              {
-                word: "fff2",
-                part: "verb",
-                },
-                {
-                  word: "gg2g",
-                  part: "verb",
-                  },
-                  {
-                    word: "hh2",
-                    part: "verb",
-                    },
-            ],
-            5: [
-              {
-              word: "dog2",
-              part: "verb",
-              },
-              {
-                word: "cat2",
-                part: "verb",
-                },
-                {
-                  word: "fff2",
-                  part: "verb",
-                  },
-                  {
-                    word: "gg2g",
-                    part: "verb",
-                    },
-                    {
-                      word: "hh2",
-                      part: "verb",
-                      },
-              ],
-  } ;
-
+  
   function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
     while (currentIndex != 0) {
@@ -253,33 +73,45 @@ function Quiz() {
     return array;
   }
 
-  const sdata = async()=>{
+  const sdata = ()=>{
     let options = [];
-    data[index].map((s)=>(
-      options.push(s.part)
+    data2[index].pos.map((s)=>(
+      options.push(s.tag)
     ))
-   
-    setrow( shuffle(options));
+    let op = shuffle(options);
+    setrow( op);
 
   }
-
   useEffect(()=>{
-    sdata();
+    if(loaddata){
+    sdata();}
     console.log(corr);
-  },[index]);
+  },[index , loaddata]);
 
   useEffect(()=>{
     startAndStop();
   },[]);
 
+
   const analysis = async(e)=>{
     e.preventDefault();
-    console.log(Math.floor((time % 6000) / 100));
+    let total = Math.floor((time % 6000) / 100);
+    console.log("TT: ",tt )
+
     startAndStop();
   }
 
   const handleNext = ()=>{
-    
+    console.log(result);
+    console.log(data2[index]);
+    if(index == 0){
+    setresult(prevState => ({ ...prevState, index: seconds.toString() }));
+  }
+  else{
+    setresult(prevState => ({ ...prevState, index: (seconds - result[index-1]).toString() }));
+
+  }
+  console.log(data2[index]);
     setindex(index+1);
   }
 
@@ -292,16 +124,17 @@ function Quiz() {
         </p>
       <div >
 
-      {data[index].map((s,index) => (
-        <div key={index}>
-        <div> WORD :{s.word}  Ans : {s.part} </div>
-
-        <div> Options :
-        <ul class="grid w-full gap-6 md:grid-cols-2">
-          { rowoptions.map((o)=>(
-    <li>
-        <input type="radio" onClick={()=>{if(document.getElementById(o).value == s.part) setcorr(corr+1)  }} id={o} name={o} value={o} class="hidden peer" required/>
-        <label for={o} class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer   peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100   ">                           
+      { loaddata &&
+     <div>
+      { data2[index].sentence} 
+      {data2[index].pos.map((s,index) => (
+        <div key={index} >
+         {s.word} : {s.tag}
+         <ul class="grid w-full gap-6 md:grid-cols-2">
+          { rowoptions.map((o , i2)=>(
+    <li key={i2}>
+        <input type="radio" onClick={(e)=>{if(e.target.value == s.tag) setcorr(corr+1)  }} id={o+i2} name={o+i2} value={o}  required/>
+        <label for={o+i2} class="inline-flex items-center justify-between w-fit p-5 text-gray-500 bg-white border border-gray-200 rounded-lg    ">                           
             <div class="block">
                 <div class="w-full text-lg font-semibold">{o}</div>  
             </div>
@@ -309,25 +142,18 @@ function Quiz() {
     </li>
     ))}
 </ul>
-        {/* <select id={s.word} class='bg-blue-300 m-6 p-2 rounded-lg'>
-    <option value="">--Please choose an option--</option> 
-          {
-            rowoptions.map((o)=>(        
-    <option value={o}>{o}</option>
-            ))
-          }
-          </select> */}
-           </div>
-           { !(index==5) && 
-    <button onClick={()=>
-      handleNext(index ,  )}>NEXT </button> 
-    } 
         </div>
       ))}
+      { !(index==19) && 
+    <button onClick={()=>
+      handleNext(index   )}>NEXT </button> 
+    }
+    </div>   
+      }    
     </div>
     
     {
-      index == 5 &&
+      index == 19 &&
       <button onClick={(e)=>
         analysis(e)
       }>Submit Quiz </button> 
