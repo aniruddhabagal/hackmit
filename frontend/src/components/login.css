@@ -54,7 +54,7 @@ input{
     background-position: center;
     border-radius: 50%;
     background-color: rgba(76, 31, 181, 0.808);
-    background-image: url(./src/img/logo.webp);
+    background-image: url(../components/img/logo.webp);
 }
 
 .right{
