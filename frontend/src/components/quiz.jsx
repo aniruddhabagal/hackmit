@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
-function Quiz() {
+import axios from "axios";
+import Chart from "./chart.jsx";
+import testing from "./testing.jsx";
 
-  const [rowoptions , setrow] = useState([]);
-  const [index , setindex] = useState(0);
+function Quiz() {
+  const [rowoptions, setrow] = useState([]);
+  const [index, setindex] = useState(0);
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-  const [result , setresult] = useState([]);
-  const [corr , setcorr] = useState(0);
-  const [loaddata , setload] = useState(false);
-  const [data2 , setdata2] =useState([]);
+  const [result, setresult] = useState([]);
+  const [corr, setcorr] = useState(0);
+  const [loaddata, setload] = useState(false);
+  const [data2, setdata2] = useState([]);
+  const [report, setReport] = useState(false);
+  const [totalTime, setTotalTime] = useState(0);
 
   useEffect(() => {
     let intervalId;
@@ -20,7 +24,7 @@ function Quiz() {
     return () => clearInterval(intervalId);
   }, [isRunning, time]);
 
-  const ld = async ()=>{
+  const ld = async () => {
     try {
       const res = await axios.get("http://192.168.0.135:8990/tutorial/20");
       console.log(res.data.data);
@@ -29,16 +33,14 @@ function Quiz() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-
-  useEffect(()=>{
-    if(!loaddata){
+  useEffect(() => {
+    if (!loaddata) {
       ld();
     }
-  },[])
+  }, []);
 
-  var total;
   // Hours calculation
   const hours = Math.floor(time / 360000);
 
@@ -60,107 +62,123 @@ function Quiz() {
     console.log(seconds.toString());
     setTime(0);
   };
-  
+
   function shuffle(array) {
-    let currentIndex = array.length,  randomIndex;
+    let currentIndex = array.length,
+      randomIndex;
     while (currentIndex != 0) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
       [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
+        array[randomIndex],
+        array[currentIndex],
+      ];
     }
-  
+
     return array;
   }
 
-  const sdata = ()=>{
+  const sdata = () => {
     let options = [];
-    data2[index].pos.map((s)=>(
-      options.push(s.tag)
-    ))
+    data2[index].pos.map((s) => options.push(s.tag));
     let op = shuffle(options);
-    setrow( op);
-
-  }
-  useEffect(()=>{
-    if(loaddata){
-    sdata();}
+    setrow(op);
+  };
+  useEffect(() => {
+    if (loaddata) {
+      sdata();
+    }
     console.log(corr);
-  },[index , loaddata]);
+  }, [index, loaddata]);
 
-  useEffect(()=>{
+  useEffect(() => {
     startAndStop();
-  },[]);
+  }, []);
 
-
-  const analysis = async(e)=>{
+  const analysis = (e) => {
     e.preventDefault();
-    let total = Math.floor((time % 6000) / 100);
-    console.log("TT: ",tt )
-
+    setTotalTime(Math.floor((time % 6000) / 100));
     startAndStop();
-  }
+    setload(false);
+    setReport(true);
+  };
 
-  const handleNext = ()=>{
+  const handleNext = () => {
     console.log(result);
     console.log(data2[index]);
-    if(index == 0){
-    setresult(prevState => ({ ...prevState, index: seconds.toString() }));
+    if (index == 0) {
+      setresult((prevState) => ({ ...prevState, index: seconds.toString() }));
+    } else {
+      setresult((prevState) => ({
+        ...prevState,
+        index: (seconds - result[index - 1]).toString(),
+      }));
+    }
+    console.log(data2[index]);
+    setindex(index + 1);
+  };
+  // var tt = totalTim
+  if (report) {
+    // return <Chart corr={corr} totalTime={totalTime} time={result} />;
+    return <testing />;
   }
-  else{
-    setresult(prevState => ({ ...prevState, index: (seconds - result[index-1]).toString() }));
-
-  }
-  console.log(data2[index]);
-    setindex(index+1);
-  }
-
-  return <div>
-  <div >
-  <p>
+  return (
+    <div>
+      <div>
+        <p>
           {hours}:{minutes.toString().padStart(2, "0")}:
           {seconds.toString().padStart(2, "0")}:
           {milliseconds.toString().padStart(2, "0")}
         </p>
-      <div >
-
-      { loaddata &&
-     <div>
-      { data2[index].sentence} 
-      {data2[index].pos.map((s,index) => (
-        <div key={index} >
-         {s.word} : {s.tag}
-         <ul class="grid w-full gap-6 md:grid-cols-2">
-          { rowoptions.map((o , i2)=>(
-    <li key={i2}>
-        <input type="radio" onClick={(e)=>{if(e.target.value == s.tag) setcorr(corr+1)  }} id={o+i2} name={o+i2} value={o}  required/>
-        <label for={o+i2} class="inline-flex items-center justify-between w-fit p-5 text-gray-500 bg-white border border-gray-200 rounded-lg    ">                           
-            <div class="block">
-                <div class="w-full text-lg font-semibold">{o}</div>  
+        <div>
+          {loaddata && (
+            <div>
+              {data2[index].sentence}
+              {data2[index].pos.map((s, index) => (
+                <div key={index}>
+                  {s.word} : {s.tag}
+                  <ul class="grid w-full gap-6 md:grid-cols-2">
+                    {rowoptions.map((o, i2) => (
+                      <li key={i2}>
+                        <input
+                          type="radio"
+                          onClick={(e) => {
+                            if (e.target.value == s.tag) setcorr(corr + 1);
+                          }}
+                          id={o + i2}
+                          name={o + i2}
+                          value={o}
+                          required
+                        />
+                        <label
+                          for={o + i2}
+                          class="inline-flex items-center justify-between w-fit p-5 text-gray-500 bg-white border border-gray-200 rounded-lg    "
+                        >
+                          <div class="block">
+                            <div class="w-full text-lg font-semibold">{o}</div>
+                          </div>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+              {!(index == 19) && (
+                <button onClick={() => handleNext(index)}>NEXT </button>
+              )}
             </div>
-        </label>
-    </li>
-    ))}
-</ul>
+          )}
         </div>
-      ))}
-      { !(index==19) && 
-    <button onClick={()=>
-      handleNext(index   )}>NEXT </button> 
-    }
-    </div>   
-      }    
+
+        {index == 19 && (
+          <button onClick={(e) => analysis(e)}>Submit Quiz </button>
+        )}
+      </div>
     </div>
-    
-    {
-      index == 19 &&
-      <button onClick={(e)=>
-        analysis(e)
-      }>Submit Quiz </button> 
-      }
-      
-  </div>
-  </div>;
+  );
+  // if (report) {
+  //   <Chart corr={corr} totalTime={totalTime} time={result} />;
+  // }
 }
 
 export default Quiz;

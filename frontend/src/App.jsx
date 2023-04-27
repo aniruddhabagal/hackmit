@@ -5,6 +5,7 @@ import Quiz from "./components/quiz";
 import Tutorial from "./components/tutorial";
 import Test from "./test";
 import Login from "./components/login";
+import Charts from "./components/chart";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="quiz" element={<Quiz />} />
         <Route path="tutorial" element={<Tutorial />} />
+        <Route path="analytics" element={<Charts />} />
         <Route path="test" element={<Test />} />
       </Routes>
     </>
