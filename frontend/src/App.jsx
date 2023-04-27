@@ -3,6 +3,7 @@ import "./App.css";
 import Dashboard from "./components/dashboard";
 import Quiz from "./components/quiz";
 import Tutorial from "./components/tutorial";
+import Test from "./test";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="quiz" element={<Quiz />} />
         <Route path="tutorial" element={<Tutorial />} />
+        <Route path="test" element={<Test />} />
       </Routes>
     </>
   );
