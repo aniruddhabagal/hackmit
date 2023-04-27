@@ -325,7 +325,7 @@ const transform=(tag)=>{
         if(t===tag){
             return GLOSSARY[tag].split(',')[0]
         }
-        // return GLOSSARY[t];
+        // return tag;
     }
 }
 
@@ -361,6 +361,7 @@ exports.parseCSV = (filePath) => {
                     }
                         // console.log('this->\n',posArray)
                         // console.log(num,sentence,posArray)
+                        posArray.pop();
                         posParse.storeSentence(num,sentence,posArray)
                     .then(msg=>{
                         console.log(msg);
