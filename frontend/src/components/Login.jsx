@@ -1,6 +1,16 @@
 import "./login.css";
+import Log from "./log";
+import { useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+
+  const navigateToDash = () => {
+    // 👇️ navigate to /contacts
+    navigate("/dashboard");
+  };
+
   return (
     <div className="login-card">
       <div className="left">
@@ -17,7 +27,13 @@ function Login() {
         <div className="logo"></div>
         <input type="text" placeholder=" Username" />
         <input type="password" placeholder=" Password" />
-        <input className="login-btn" type="submit" value="Login" />
+        <input
+          className="login-btn"
+          type="submit"
+          value="Login"
+          onClick={navigateToDash}
+        />
+        <Log className="login-btn" onClick={navigateToDash} />
       </div>
     </div>
   );
