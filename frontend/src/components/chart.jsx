@@ -183,9 +183,18 @@ function Chart({ corr2, tTime, time }) {
   ts = time;
 
   console.log("ts is ", ts[1]);
+  const min = Math.floor(tt / 60);
+  const sec = tt % 60;
+  function padTo2Digits(num) {
+    return num.toString().padStart(2, "0");
+  }
+  const result = `${padTo2Digits(min)}:${padTo2Digits(sec)}`;
 
   return (
     <div>
+      <h1>Analytics</h1>
+
+      <h3>Total time elapsed: {result}</h3>
       <div style={{ width: 700 }}>
         <BarChart chartData={barData} />
       </div>
