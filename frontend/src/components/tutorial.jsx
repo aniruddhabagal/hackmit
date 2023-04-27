@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useState } from "react";
+import "./tutorial.css";
 const data = {
   0: [
     {
@@ -50,111 +51,104 @@ const data = {
     {
       word: "dog2",
       part: "verb",
-      },
-      {
-        word: "cat2",
-        part: "verb",
-        },
-        {
-          word: "fff2",
-          part: "verb",
-          },
-          {
-            word: "gg2g",
-            part: "verb",
-            },
-            {
-              word: "hh2",
-              part: "verb",
-              },
-      ], 
-      3: [
-        {
-        word: "dog2",
-        part: "verb",
-        },
-        {
-          word: "cat2",
-          part: "verb",
-          },
-          {
-            word: "fff2",
-            part: "verb",
-            },
-            {
-              word: "gg2g",
-              part: "verb",
-              },
-              {
-                word: "hh2",
-                part: "verb",
-                },
-        ],
-        4: [
-          {
-          word: "dog2",
-          part: "verb",
-          },
-          {
-            word: "cat2",
-            part: "verb",
-            },
-            {
-              word: "fff2",
-              part: "verb",
-              },
-              {
-                word: "gg2g",
-                part: "verb",
-                },
-                {
-                  word: "hh2",
-                  part: "verb",
-                  },
-          ],
-          5: [
-            {
-            word: "dog2",
-            part: "verb",
-            },
-            {
-              word: "cat2",
-              part: "verb",
-              },
-              {
-                word: "fff2",
-                part: "verb",
-                },
-                {
-                  word: "gg2g",
-                  part: "verb",
-                  },
-                  {
-                    word: "hh2",
-                    part: "verb",
-                    },
-            ],
-} ; 
-
-
-
-
-
-
+    },
+    {
+      word: "cat2",
+      part: "verb",
+    },
+    {
+      word: "fff2",
+      part: "verb",
+    },
+    {
+      word: "gg2g",
+      part: "verb",
+    },
+    {
+      word: "hh2",
+      part: "verb",
+    },
+  ],
+  3: [
+    {
+      word: "dog2",
+      part: "verb",
+    },
+    {
+      word: "cat2",
+      part: "verb",
+    },
+    {
+      word: "fff2",
+      part: "verb",
+    },
+    {
+      word: "gg2g",
+      part: "verb",
+    },
+    {
+      word: "hh2",
+      part: "verb",
+    },
+  ],
+  4: [
+    {
+      word: "dog2",
+      part: "verb",
+    },
+    {
+      word: "cat2",
+      part: "verb",
+    },
+    {
+      word: "fff2",
+      part: "verb",
+    },
+    {
+      word: "gg2g",
+      part: "verb",
+    },
+    {
+      word: "hh2",
+      part: "verb",
+    },
+  ],
+  5: [
+    {
+      word: "dog2",
+      part: "verb",
+    },
+    {
+      word: "cat2",
+      part: "verb",
+    },
+    {
+      word: "fff2",
+      part: "verb",
+    },
+    {
+      word: "gg2g",
+      part: "verb",
+    },
+    {
+      word: "hh2",
+      part: "verb",
+    },
+  ],
+};
 
 function Tutorial() {
+  const [index, setindex] = useState(0);
+  const [loaddata, setload] = useState(false);
+  const [data2, setdata2] = useState([]);
 
-  const [index , setindex] = useState(0);
-  const [loaddata , setload] = useState(false);
-  const [data2 , setdata2] =useState([]);
-
-  const goquiz = async (e)=>{
-   // e.preventdefault();
+  const goquiz = async (e) => {
+    // e.preventdefault();
     window.alert("Click Ok to start the quiz");
-    window.location.replace("/quiz")
-  } 
+    window.location.replace("/quiz");
+  };
 
-  const ld = async ()=>{
+  const ld = async () => {
     try {
       const res = await axios.get("http://192.168.0.135:8990/tutorial");
       console.log(res.data.data);
@@ -163,40 +157,95 @@ function Tutorial() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-
-  useEffect(()=>{
-    if(!loaddata){
+  useEffect(() => {
+    if (!loaddata) {
       ld();
     }
-  },[])
-  return <>
-  <div>
-      { loaddata &&
-     <div>
-      { data2[index].sentence} 
-      {data2[index].pos.map((s,index) => (
-        <div key={index} >
-         {s.word} : {s.tag}
+  }, []);
+  return (
+    <>
+      <div className="tut-container">
+        <div class="logo-holder">
+          <div class="bg"></div>
+          <div class="bar"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill2"></div>
+          <div class="bar fill3"></div>
+          <div class="bar fill4"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill5"></div>
+          <div class="bar fill6"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill2"></div>
+          <div class="bar fill3"></div>
+          <div class="bar fill4"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill5"></div>
+          <div class="bar fill6"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill2"></div>
+          <div class="bar fill3"></div>
+          <div class="bar fill4"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill5"></div>
+          <div class="bar fill6"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill2"></div>
+          <div class="bar fill3"></div>
+          <div class="bar fill4"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill5"></div>
+          <div class="bar fill6"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill2"></div>
+          <div class="bar fill3"></div>
+          <div class="bar fill4"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill5"></div>
+          <div class="bar fill6"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill2"></div>
+          <div class="bar fill3"></div>
+          <div class="bar fill4"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill5"></div>
+          <div class="bar fill6"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill2"></div>
+          <div class="bar fill3"></div>
+          <div class="bar fill4"></div>
+          <div class="bar fill1"></div>
+          <div class="bar fill5"></div>
+          <div class="bar fill6"></div>
+          
+          <div class="bar"></div>
         </div>
-      ))}
-    </div>   
-      }
-    { !(index==19) && 
-    <button onClick={()=>
-      setindex(index+1)}>NEXT </button> 
-    } 
-    {
-      index == 19 &&
-      <button onClick={(e)=>
-        goquiz(e)
-      }>Take Quiz </button> 
-      }
-      
-  </div>
-  
-  </>;
+        {loaddata && (
+          <div>
+            <div className="question">Q. {data2[index].sentence}</div>
+            {data2[index].pos.map((s, index) => (
+              <div className="word-ans" key={index}>
+                <span className="word-ques">{s.word}</span> :{" "}
+                <span className="ans-ques">{s.tag}</span>
+              </div>
+            ))}
+          </div>
+        )}
+        {!(index == 19) && (
+          <button className="btn-nxt" onClick={() => setindex(index + 1)}>
+            NEXT{" "}
+          </button>
+        )}
+        {index == 19 && (
+          <button className="btn-test" onClick={(e) => goquiz(e)}>
+            Take Quiz{" "}
+          </button>
+        )}
+      </div>
+    </>
+  );
 }
 
 export default Tutorial;
