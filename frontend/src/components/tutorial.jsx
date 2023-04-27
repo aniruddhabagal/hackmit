@@ -219,7 +219,7 @@ function Tutorial() {
           <div class="bar fill1"></div>
           <div class="bar fill5"></div>
           <div class="bar fill6"></div>
-          
+
           <div class="bar"></div>
         </div>
         {loaddata && (
