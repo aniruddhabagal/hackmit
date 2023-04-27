@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from 'axios';
 import { useState } from "react";
 const data = {
   0: [
@@ -144,28 +145,50 @@ const data = {
 function Tutorial() {
 
   const [index , setindex] = useState(0);
+  const [loaddata , setload] = useState(false);
+  const [data2 , setdata2] =useState([]);
 
   const goquiz = async (e)=>{
    // e.preventdefault();
     window.alert("Click Ok to start the quiz");
     window.location.replace("/quiz")
   } 
+
+  const ld = async ()=>{
+    try {
+      const res = await axios.get("http://192.168.0.135:8990/tutorial");
+      console.log(res.data.data);
+      setdata2(res.data.data);
+      setload(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  useEffect(()=>{
+    if(!loaddata){
+      ld();
+    }
+  },[])
   return <>
   <div>
-      <div>
-      {data[index].map((s) => (
-        <div>
-        <div> WORD :{s.word} </div>
-        <div> PART : {s.part} </div>
+      { loaddata &&
+     <div>
+      { data2[index].sentence} 
+      {data2[index].pos.map((s,index) => (
+        <div key={index} >
+         {s.word} : {s.tag}
         </div>
       ))}
-    </div>
-    { !(index==5) && 
+    </div>   
+      }
+    { !(index==19) && 
     <button onClick={()=>
       setindex(index+1)}>NEXT </button> 
     } 
     {
-      index == 5 &&
+      index == 19 &&
       <button onClick={(e)=>
         goquiz(e)
       }>Take Quiz </button> 
