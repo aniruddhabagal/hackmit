@@ -1,13 +1,3 @@
-const fs = require('fs')
-const pos = require('pos');
-
-const posParse = require('../db/posParse')
-
-const dbConn=require('../db/dbConn')
-
-const { storePOS } = require('../db/posParse');
-const { getPOSofSentc } = require('./parts_of_speech');
-
 const GLOSSARY = {
     "ADJ": "adjective",
     "ADP": "adposition",
@@ -320,88 +310,34 @@ const GLOSSARY = {
     "GPE_ORG": "Geo-political entity, with an organisation sense, e.g. 'Spain declined to meet with Belgium'",
 }
 
-const transform=(tag)=>{
-    for (const t in GLOSSARY) {
-        if(t===tag){
-            return GLOSSARY[tag].split(',')[0]
-        }
-        // return GLOSSARY[t];
-    }
-}
 
-exports.parseCSV = (filePath) => {
-    console.log(filePath)
+exports.getPOSofSentc = (sentence) => {
     return new Promise((resolve, reject) => {
-        fs.readFile(filePath, "utf-8", (err, data) => {
-            if (err) {
-                console.log(err);
-                return reject({ err: true, msg: 'failed csv parsing' })
-            }
-            else {
-                data = data.split('\n')
-                numOfSentences = data.length
-                data.forEach(sentence => {
-                    // data=data.split('\r')[0].split(',')[1]
-                    num=sentence.split('\r')[0].split(',')[0]
-                    sentence=sentence.split('\r')[0].split(',')[1]
-                    
-                    let words = new pos.Lexer().lex(sentence);
-                    let tagger = new pos.Tagger();
-                    let taggedWords = tagger.tag(words);
-                    // console.log(sentence)
-                    let posArray = []
-                    for (i in taggedWords) {
-                        var taggedWord = taggedWords[i];
-                        var word = taggedWord[0];
-                        var tag = taggedWord[1];
-                        tag=transform(tag)
-                        let pos = { word, tag }
-                        posArray.push(pos);
-
-                    }
-                        // console.log('this->\n',posArray)
-                        // console.log(num,sentence,posArray)
-                        posParse.storeSentence(num,sentence,posArray)
-                    .then(msg=>{
-                        console.log(msg);
-                    })
-                    .catch(err=>{
-                        reject('failed pos entry sds')
-                    })
-
-                });
-                console.log(numOfSentences)
-                // for (i = 1; i < numOfSentences; i++) {
-
-                //     num = data[i].split(',')[0]
-                //     let sentenceToEnter = data[i].split('\r')[0].split(',')[1]
-
-                //     let words = new pos.Lexer().lex(sentenceToEnter);
-                //     let tagger = new pos.Tagger();
-                //     let taggedWords = tagger.tag(words);
-                //     console.log(num,sentenceToEnter)
-                //     let posArray = []
-                //     for (i in taggedWords) {
-                //         var taggedWord = taggedWords[i];
-                //         var word = taggedWord[0];
-                //         var tag = taggedWord[1];
-                //         let pos = { word, tag }
-                //         posArray.push(pos);
-
-                //     }
-                //         console.log('this->\n',posArray)
-                //         posParse.storeSentence(num, sentenceToEnter, posArray)
-                //         .then(msg => {
-                //             console.log(msg);
-                //         })
-                //         .catch(err => {
-                //             console.log("error at insert sent")
-                //             reject('failed pos entryyyyy')
-                //         })
-                // }
-
-            }
-        });
+    let words = new pos.Lexer().lex(sentence);
+    let tagger = new pos.Tagger();
+    let taggedWords = tagger.tag(words);
+    let posArray=[]
+    for (i in taggedWords) {
+        var taggedWord = taggedWords[i];
+        var word = taggedWord[0];
+        var tag = taggedWord[1];
+        for (const t in GLOSSARY) {
+            if(t===tag)
+                console.log(tag,' : ',GLOSSARY[t])
+            // return GLOSSARY[tag];
+        }
+        let pos={word,tag}
+        posArray.push(pos);
+        
+    }
+    resolve(posArray)
     })
 
 }
+
+
+
+// extend the lexicon
+// tagger.extendLexicon({'Obama': ['NNP']});
+// tagger.tag(['Mr', 'Obama']);
+// --> [[ 'Mr', 'NNP' ], [ 'Obama', 'NNP' ]]
