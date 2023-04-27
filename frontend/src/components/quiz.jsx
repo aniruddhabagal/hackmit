@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./quiz.css";
+import Chart from "./chart.jsx";
+import Testing from "./Testing.jsx";
 function Quiz() {
   const [rowoptions, setrow] = useState([]);
   const [index, setindex] = useState(0);
@@ -10,6 +12,8 @@ function Quiz() {
   const [corr, setcorr] = useState(0);
   const [loaddata, setload] = useState(false);
   const [data2, setdata2] = useState([]);
+  const [report, setReport] = useState(false);
+  const [totalTime, setTotalTime] = useState();
 
   useEffect(() => {
     let intervalId;
@@ -92,84 +96,104 @@ function Quiz() {
     startAndStop();
   }, []);
 
-  const analysis = async (e) => {
+  const analysis = (e) => {
     e.preventDefault();
-    let total = Math.floor((time % 6000) / 100);
-    console.log("TT: ", tt);
-
+    console.log(result);
+    setTotalTime(Math.floor((time % 6000) / 100));
     startAndStop();
+    setload(false);
+    setReport(true);
   };
 
-  const handleNext = () => {
-    console.log(result);
-    console.log(data2[index]);
+  const handleNext = (index) => {
+    //  console.log(result);
     if (index == 0) {
-      setresult((prevState) => ({ ...prevState, index: seconds.toString() }));
+      setresult((prevState) => [...prevState, seconds]);
     } else {
-      setresult((prevState) => ({
-        ...prevState,
-        index: (seconds - result[index - 1]).toString(),
-      }));
+      setresult((prevState) => [...prevState, seconds - result[index - 1]]);
     }
     console.log(data2[index]);
     setindex(index + 1);
   };
+  // var tt = totalTim
+  if (report == false) {
+    // return <Chart corr={corr} totalTime={totalTime} time={result} />;
 
-  return (
-    <div>
-      <div className="hero-cont">
-        <p className="timer">
-          {hours}:{minutes.toString().padStart(2, "0")}:
-          {seconds.toString().padStart(2, "0")}:
-          {milliseconds.toString().padStart(2, "0")}
-        </p>
-        <div>
-          {loaddata && (
-            <div>
-              <div className="question">{data2[index].sentence}</div>
-              {data2[index].pos.map((s, index) => (
-                <div className="flex-contain" key={index}>
-                  <div className="quiz-word">{s.word} :</div>
-                  {/* <div className="ans-ques">{s.tag}</div> */}
-                  <ul >
-                    {rowoptions.map((o, i2) => (
-                      <li key={i2}>
-                        <input
-                          type="radio"
-                          onClick={(e) => {
-                            if (e.target.value == s.tag) setcorr(corr + 1);
-                          }}
-                          id={o + i2}
-                          name={o + i2}
-                          value={o}
-                          required
-                        />
-                        <label
-                          for={o + i2}
-                          class="items-center justify-center w-fit p-5 text-gray-500 bg-white border border-gray-200 rounded-lg"
-                        >
-                          <div class="block">
-                            <div class="w-full text-lg font-semibold">{o}</div>
-                          </div>
-                        </label>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-              {!(index == 19) && (
-                <button className="quiz-nxt" onClick={() => handleNext(index)}>NEXT </button>
-              )}
-            </div>
+    return (
+      <div>
+        <div className="hero-cont">
+          <p className="timer">
+            {hours}:{minutes.toString().padStart(2, "0")}:
+            {seconds.toString().padStart(2, "0")}:
+            {milliseconds.toString().padStart(2, "0")}
+          </p>
+          <div>
+            {loaddata && (
+              <div>
+                <div className="question">{data2[index].sentence}</div>
+                {data2[index].pos.map((s, index) => (
+                  <div className="flex-contain" key={index}>
+                    <div className="quiz-word">{s.word} :</div>
+                    {/* <div className="ans-ques">{s.tag}</div> */}
+                    <ul>
+                      {rowoptions.map((o, i2) => (
+                        <li key={i2}>
+                          <input
+                            type="radio"
+                            onClick={(e) => {
+                              if (e.target.value == s.tag) setcorr(corr + 1);
+                            }}
+                            id={o + i2}
+                            name={o + i2}
+                            value={o}
+                            required
+                          />
+                          <label
+                            for={o + i2}
+                            class="items-center justify-center w-fit p-5 text-gray-500 bg-white border border-gray-200 rounded-lg"
+                          >
+                            <div class="block">
+                              <div class="w-full text-lg font-semibold">
+                                {o}
+                              </div>
+                            </div>
+                          </label>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+                {!(index == 19) && (
+                  <button
+                    className="quiz-nxt"
+                    onClick={() => handleNext(index)}
+                  >
+                    NEXT{" "}
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+
+          {index == 19 && (
+            <button className="quiz-sub" onClick={(e) => analysis(e)}>
+              Submit Quiz{" "}
+            </button>
           )}
         </div>
-
-        {index == 19 && (
-          <button className="quiz-sub" onClick={(e) => analysis(e)}>Submit Quiz </button>
-        )}
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div>
+        {/* <Testing/> */}
+        <Chart corr2={corr} tTime={totalTime} time={result} />;
+      </div>
+    );
+  }
+  // if (report) {
+  //   <Chart corr={corr} totalTime={totalTime} time={result} />;
+  // }
 }
 
 export default Quiz;
