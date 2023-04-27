@@ -67,27 +67,110 @@ const data = {
               part: "verb",
               },
       ], 
+      3: [
+        {
+        word: "dog2",
+        part: "verb",
+        },
+        {
+          word: "cat2",
+          part: "verb",
+          },
+          {
+            word: "fff2",
+            part: "verb",
+            },
+            {
+              word: "gg2g",
+              part: "verb",
+              },
+              {
+                word: "hh2",
+                part: "verb",
+                },
+        ],
+        4: [
+          {
+          word: "dog2",
+          part: "verb",
+          },
+          {
+            word: "cat2",
+            part: "verb",
+            },
+            {
+              word: "fff2",
+              part: "verb",
+              },
+              {
+                word: "gg2g",
+                part: "verb",
+                },
+                {
+                  word: "hh2",
+                  part: "verb",
+                  },
+          ],
+          5: [
+            {
+            word: "dog2",
+            part: "verb",
+            },
+            {
+              word: "cat2",
+              part: "verb",
+              },
+              {
+                word: "fff2",
+                part: "verb",
+                },
+                {
+                  word: "gg2g",
+                  part: "verb",
+                  },
+                  {
+                    word: "hh2",
+                    part: "verb",
+                    },
+            ],
 } ; 
 
 
 
 
+
+
+
 function Tutorial() {
+
   const [index , setindex] = useState(0);
+
+  const goquiz = async (e)=>{
+   // e.preventdefault();
+    window.alert("Click Ok to start the quiz");
+    window.location.replace("/quiz")
+  } 
   return <>
   <div>
-
-
       <div>
       {data[index].map((s) => (
-        <div>WORD :{s.word}
-         PART : {s.part}
+        <div>
+        <div> WORD :{s.word} </div>
+        <div> PART : {s.part} </div>
         </div>
-        
       ))}
     </div>
-
-      <button onClick={()=>setindex(index+1)}>NEXT </button>
+    { !(index==5) && 
+    <button onClick={()=>
+      setindex(index+1)}>NEXT </button> 
+    } 
+    {
+      index == 5 &&
+      <button onClick={(e)=>
+        goquiz(e)
+      }>Take Quiz </button> 
+      }
+      
   </div>
   
   </>;
