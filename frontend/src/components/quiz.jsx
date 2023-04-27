@@ -14,6 +14,7 @@ function Quiz() {
   const [data2, setdata2] = useState([]);
   const [report, setReport] = useState(false);
   const [totalTime, setTotalTime] = useState();
+  const [checkTime, setck] = useState(0);
 
   useEffect(() => {
     let intervalId;
@@ -108,9 +109,16 @@ function Quiz() {
   const handleNext = (index) => {
     //  console.log(result);
     if (index == 0) {
-      setresult((prevState) => [...prevState, seconds]);
+      setresult((prevState) => [...prevState, Math.floor((time % 6000) / 100)]);
+      setck(Math.floor((time % 6000) / 100));
     } else {
-      setresult((prevState) => [...prevState, seconds - result[index - 1]]);
+      setresult((prevState) => [
+        ...prevState,
+        Math.floor((time % 6000) / 100) - checkTime,
+      ]);
+
+      setck(Math.floor((time % 6000) / 100));
+      console.log(result);
     }
     console.log(data2[index]);
     setindex(index + 1);
