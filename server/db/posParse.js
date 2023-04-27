@@ -64,3 +64,16 @@ exports.getSentenceAll = () => {
         })
     })
 }
+
+exports.removePunctuation=()=>{
+    return new Promise((resolve, reject) => {
+        sentences.updateMany({},{'$pull': {'pos': {'word': '.'}}},{multi:true})
+        .then(msg=>{
+            console.log('removed full stop')
+            resolve(`Removed full stops`)
+        })
+        .catch(err=>{
+            reject(`Failed removeing full stop`)
+        })
+    })
+}
