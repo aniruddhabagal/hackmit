@@ -25,7 +25,6 @@ function Login() {
       </div>
       <div className="right">
         <div className="logo"></div>
-        <form>
           <input type="text" placeholder=" Username*" required/>
           <input type="password" placeholder=" Password*" required />
           <input
@@ -35,7 +34,6 @@ function Login() {
             onClick={navigateToDash}
           />
           <Log className="login-btn" onClick={navigateToDash} />
-        </form>
       </div>
     </div>
   );
