@@ -5,8 +5,8 @@ import PieChart from "./piechart";
 import { BarData } from "./Data";
 import { PieData } from "./Data";
 
-function Chart({ corr, totalTime, time }) {
-  console.log(corr, time, totalTime);
+function Chart({ corr2, tTime, time }) {
+  console.log(corr2, time, tTime);
 
   const [barData, setBarData] = useState({
     labels: BarData.map((data) => data.id),

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Chart from "./chart.jsx";
-import testing from "./testing.jsx";
+import Testing from "./Testing.jsx";
 
 function Quiz() {
   const [rowoptions, setrow] = useState([]);
@@ -13,7 +13,7 @@ function Quiz() {
   const [loaddata, setload] = useState(false);
   const [data2, setdata2] = useState([]);
   const [report, setReport] = useState(false);
-  const [totalTime, setTotalTime] = useState(0);
+  const [totalTime, setTotalTime] = useState();
 
   useEffect(() => {
     let intervalId;
@@ -97,31 +97,29 @@ function Quiz() {
 
   const analysis = (e) => {
     e.preventDefault();
+    console.log(result);
     setTotalTime(Math.floor((time % 6000) / 100));
     startAndStop();
     setload(false);
     setReport(true);
   };
 
-  const handleNext = () => {
-    console.log(result);
-    console.log(data2[index]);
+  const handleNext = (index) => {
+  //  console.log(result);
     if (index == 0) {
-      setresult((prevState) => ({ ...prevState, index: seconds.toString() }));
+      setresult((prevState) => ([ ...prevState,  seconds ]));
     } else {
-      setresult((prevState) => ({
+      setresult((prevState) => ([
         ...prevState,
-        index: (seconds - result[index - 1]).toString(),
-      }));
+         (seconds - result[index - 1]),
+      ]));
     }
     console.log(data2[index]);
     setindex(index + 1);
   };
   // var tt = totalTim
-  if (report) {
+  if ( report== false) {
     // return <Chart corr={corr} totalTime={totalTime} time={result} />;
-    return <testing />;
-  }
   return (
     <div>
       <div>
@@ -176,6 +174,14 @@ function Quiz() {
       </div>
     </div>
   );
+} else {
+  return (
+    <div>
+      {/* <Testing/> */}
+      <Chart corr2={corr} tTime={totalTime} time={result} />;
+    </div>
+  );
+}
   // if (report) {
   //   <Chart corr={corr} totalTime={totalTime} time={result} />;
   // }

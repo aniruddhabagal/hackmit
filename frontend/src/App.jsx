@@ -7,7 +7,7 @@ import Test from "./test";
 import Login from "./components/login";
 import Charts from "./components/chart";
 
-function App() {
+function App() { 
   return (
     <>
       <Routes>
