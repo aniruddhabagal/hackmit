@@ -1,7 +1,7 @@
 import "./login.css";
 import Log from "./log";
-import { useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
@@ -25,15 +25,15 @@ function Login() {
       </div>
       <div className="right">
         <div className="logo"></div>
-          <input type="text" placeholder=" Username*" required/>
-          <input type="password" placeholder=" Password*" required />
-          <input
-            className="login-btn"
-            type="submit"
-            value="Login"
-            onClick={navigateToDash}
-          />
-          <Log className="login-btn" onClick={navigateToDash} />
+        <input type="text" placeholder=" Username*" required />
+        <input type="password" placeholder=" Password*" required />
+        <input
+          className="login-btn"
+          type="submit"
+          value="Login"
+          onClick={navigateToDash}
+        />
+        <Log className="login-btn" onClick={navigateToDash} />
       </div>
     </div>
   );
