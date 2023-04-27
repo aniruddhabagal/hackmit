@@ -15,6 +15,7 @@ function Quiz() {
   const [report, setReport] = useState(false);
   const [totalTime, setTotalTime] = useState();
   const [checkTime, setck] = useState(0);
+  const [ele , setele] = useState(69);
 
   useEffect(() => {
     let intervalId;
@@ -106,8 +107,16 @@ function Quiz() {
     setReport(true);
   };
 
+  const clearradios = ()=>{
+    var ele = document.querySelectorAll("input[type=radio]");
+    for(var i=0;i<ele.length;i++){
+       ele[i].checked = false;
+    }
+  }
+
   const handleNext = (index) => {
     //  console.log(result);
+    setele(ele+1);
     if (index == 0) {
       setresult((prevState) => [...prevState, Math.floor((time % 6000) / 100)]);
       setck(Math.floor((time % 6000) / 100));
@@ -122,6 +131,10 @@ function Quiz() {
     }
     console.log(data2[index]);
     setindex(index + 1);
+    var ele = document.querySelectorAll("input[type=radio]");
+   for(var i=0;i<ele.length;i++){
+      ele[i].checked = false;
+   }
   };
   // var tt = totalTim
   if (report == false) {
@@ -145,19 +158,20 @@ function Quiz() {
                     {/* <div className="ans-ques">{s.tag}</div> */}
                     <ul>
                       {rowoptions.map((o, i2) => (
-                        <li key={i2}>
+                        <li key={o}>
                           <input
+                          className="rado"
                             type="radio"
                             onClick={(e) => {
                               if (e.target.value == s.tag) setcorr(corr + 1);
                             }}
-                            id={o + i2}
-                            name={o + i2}
+                            id={s.word+o+ele.toString()}
+                            name={s.word+o+s.tag+ele.toString()}
                             value={o}
                             required
                           />
                           <label
-                            for={o + i2}
+                            for={s.word+o+ele.toString()}
                             class="items-center justify-center w-fit p-5 text-gray-500 bg-white border border-gray-200 rounded-lg"
                           >
                             <div class="block">
@@ -178,9 +192,16 @@ function Quiz() {
                   >
                     NEXT{" "}
                   </button>
+                  
                 )}
               </div>
             )}
+              <button
+                    className="quiz-nxt"
+                    onClick={() => clearradios()}
+                  >
+                    Reset Answers
+                  </button>
           </div>
 
           {index == 19 && (
