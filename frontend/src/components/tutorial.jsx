@@ -238,6 +238,11 @@ function Tutorial() {
             NEXT{" "}
           </button>
         )}
+        {!(index == 19) && (
+          <button className="btn-nxt" onClick={() => setindex(19)}>
+            Skip to End{" "}
+          </button>
+        )}
         {index == 19 && (
           <button className="btn-test" onClick={(e) => goquiz(e)}>
             Take Quiz{" "}

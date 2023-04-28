@@ -17,6 +17,7 @@ function Quiz() {
   const [totalTime, setTotalTime] = useState();
   const [checkTime, setck] = useState(0);
   const [ele, setele] = useState(69);
+  const [getanswers , setanswers] = useState(false);
 
   useEffect(() => {
     let intervalId;
@@ -213,9 +214,11 @@ function Quiz() {
     return (
       <div>
         {/* <Testing/> */}
-        <Chart corr2={corr} tTime={totalTime} time={result} />;
+        <Chart corr2={corr} tTime={totalTime} time={result} data = {data2} />;
         <button className="quiz-dash">
+
           Dashboard{" "}
+
         </button>
       </div>
     );
