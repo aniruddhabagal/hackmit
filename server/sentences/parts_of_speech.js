@@ -1,3 +1,5 @@
+// const { transform } = require("./insertSentence");
+const pos=require('pos')
 const GLOSSARY = {
     "ADJ": "adjective",
     "ADP": "adposition",
@@ -299,38 +301,42 @@ const GLOSSARY = {
     "QUANTITY": "Measurements, as of weight or distance",
     "ORDINAL": '"first", "second", etc.',
     "CARDINAL": "Numerals that do not fall under another type",
-    
+
     "PER": "Named person or family.",
     "MISC": "Miscellaneous entities, e.g. events, nationalities, products or works of art",
-    
+
     "EVT": "Festivals, cultural events, sports events, weather phenomena, wars, etc.",
     "PROD": "Product, i.e. artificially produced entities including speeches, radio shows, programming languages, contracts, laws and ideas",
     "DRV": "Words (and phrases?) that are dervied from a name, but not a name in themselves, e.g. 'Oslo-mannen' ('the man from Oslo')",
     "GPE_LOC": "Geo-political entity, with a locative sense, e.g. 'John lives in Spain'",
     "GPE_ORG": "Geo-political entity, with an organisation sense, e.g. 'Spain declined to meet with Belgium'",
 }
-
+const transform=(tag)=>{
+    for (const t in GLOSSARY) {
+        if(t===tag){
+            return GLOSSARY[tag].split(',')[0]
+        }
+        // return tag;
+    }
+}
 
 exports.getPOSofSentc = (sentence) => {
     return new Promise((resolve, reject) => {
-    let words = new pos.Lexer().lex(sentence);
-    let tagger = new pos.Tagger();
-    let taggedWords = tagger.tag(words);
-    let posArray=[]
-    for (i in taggedWords) {
-        var taggedWord = taggedWords[i];
-        var word = taggedWord[0];
-        var tag = taggedWord[1];
-        for (const t in GLOSSARY) {
-            if(t===tag)
-                console.log(tag,' : ',GLOSSARY[t])
-            // return GLOSSARY[tag];
+        let words = new pos.Lexer().lex(sentence);
+        let tagger = new pos.Tagger();
+        let taggedWords = tagger.tag(words);
+        let posArray = []
+        for (i in taggedWords) {
+            var taggedWord = taggedWords[i];
+            var word = taggedWord[0];
+            var tag = taggedWord[1];
+            tag=transform(tag);
+            let pos = { word, tag }
+            posArray.push(pos);
+
         }
-        let pos={word,tag}
-        posArray.push(pos);
-        
-    }
-    resolve(posArray)
+        posArray.pop()
+        resolve(posArray)
     })
 
 }
