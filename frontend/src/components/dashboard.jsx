@@ -1,5 +1,6 @@
 import React from "react";
 import "./dashboard.css";
+import Audio from "./Audio";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
@@ -31,6 +32,7 @@ function Dashboard() {
           </button>
         </div>
       </div>
+      <Audio />
     </div>
   );
 }
