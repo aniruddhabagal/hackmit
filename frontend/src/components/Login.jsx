@@ -2,13 +2,27 @@ import "./login.css";
 import Log from "./log";
 
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 function Login() {
   const navigate = useNavigate();
-
-  const navigateToDash = () => {
+  const navigateToDash = async(e) => {
     // 👇️ navigate to /contacts
-    navigate("/dashboard");
+    e.preventDefault();
+    let det = {username: document.getElementById('usn').value,
+                password : document.getElementById('pass').value}
+
+    try {
+      const res = await axios.post("http://192.168.0.135:8990/login", det);
+      if(res.status == 200){
+        navigate("/dashboard");
+      }
+      else {
+        window.alert("Invalid Credentials!!");
+      }
+    } catch (error) {
+      console.log(error);
+    }            
   };
 
   return (
@@ -25,15 +39,14 @@ function Login() {
       </div>
       <div className="right">
         <div className="logo"></div>
-        <input type="text" placeholder=" Username*" required />
-        <input type="password" placeholder=" Password*" required />
+        <input id='usn' type="text" placeholder=" Username*" required />
+        <input id='pass' type="password" placeholder=" Password*" required />
         <input
           className="login-btn"
           type="submit"
           value="Login"
-          onClick={navigateToDash}
+          onClick={(e)=>navigateToDash(e)}
         />
-        <Log className="login-btn" onClick={navigateToDash} />
       </div>
     </div>
   );
