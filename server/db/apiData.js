@@ -25,3 +25,27 @@ exports.tutorialEndpointRandom=(sizee)=>{
         })
     })
 }
+
+exports.getLastId=()=>{
+    return new Promise((resolve, reject) => {
+        senetences.count()
+        .then(msg=>{
+            resolve(msg)
+        })
+        .catch(err=>{
+            reject(`failed fetch total count`)
+        })
+    })
+}
+
+exports.getLastRecord=()=>{
+    return new Promise((resolve, reject) => {
+        senetences.find({}).sort({_id:-1}).limit(1)
+        .then(msg=>{
+            resolve(msg)
+        })
+        .catch(err=>{
+            reject(`failed fetch last record`)
+        })
+    })
+}

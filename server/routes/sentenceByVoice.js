@@ -1,9 +1,10 @@
-const { storeSentence, getLastId } = require("../db/posParse");
+const { storeSentence} = require("../db/posParse");
 const { getPOSofSentc } = require("../sentences/parts_of_speech");
 const { Configuration, OpenAIApi } = require('openai')
 const fs = require('fs')
 const multer = require('multer');
 const path = require("path");
+const { getLastId } = require("../db/apiData");
 
 const upload = multer()
 
@@ -28,7 +29,7 @@ exports.enterSentenceByVoice = async (req, res) => {
     console.log(`${req.ip} -> ${req.url}`)
     // console.log(req.body)
     let posi;
-    let lastId=await getLastId();
+    let lastId=await getLastId()
     const { audio } = req.body
     if (audio) {
         fs.writeFile('sentenceAudio.mp3', audio, { encoding: 'base64' }, (err) => {

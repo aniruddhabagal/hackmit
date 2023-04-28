@@ -1,7 +1,7 @@
 const { parseCSV } = require("../sentences/insertSentence")
 const { loginFunc } = require("./login")
 const { enterSentenceByVoice } = require("./sentenceByVoice")
-const { tutorialQuestions, randomTutorialQuestions } = require("./tutorial")
+const { tutorialQuestions, randomTutorialQuestions, lastRecordFunc } = require("./tutorial")
 const path=require('path')
 const multer=require('multer')
 
@@ -14,4 +14,6 @@ module.exports=(app)=>{
     app.post('/login',loginFunc)
 
     app.post('/sentenceByVoice',upload.any('file'),enterSentenceByVoice)
+
+    app.get('/lastrecord',lastRecordFunc)
 }
