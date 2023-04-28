@@ -3,6 +3,7 @@ import axios from "axios";
 import "./quiz.css";
 import Chart from "./chart.jsx";
 import Testing from "./Testing.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Quiz() {
   const [rowoptions, setrow] = useState([]);
@@ -17,6 +18,8 @@ function Quiz() {
   const [totalTime, setTotalTime] = useState();
   const [checkTime, setck] = useState(0);
   const [ele, setele] = useState(69);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     let intervalId;
@@ -26,6 +29,11 @@ function Quiz() {
     }
     return () => clearInterval(intervalId);
   }, [isRunning, time]);
+
+  const navigateToDash = () => {
+    // 👇️ navigate to /contacts
+    navigate("/dashboard");
+  };
 
   const ld = async () => {
     try {
@@ -214,7 +222,7 @@ function Quiz() {
       <div>
         {/* <Testing/> */}
         <Chart corr2={corr} tTime={totalTime} time={result} />;
-        <button className="quiz-dash">
+        <button className="quiz-dash" onClick={navigateToDash}>
           Dashboard{" "}
         </button>
       </div>
