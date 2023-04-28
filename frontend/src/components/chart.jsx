@@ -3,6 +3,7 @@ import { useState } from "react";
 import BarChart from "./barChart";
 import PieChart from "./piechart";
 import "./chart.css";
+
 // import { BarData } from "./Data";
 // import { PieData } from "./Data";
 

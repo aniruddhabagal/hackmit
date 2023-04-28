@@ -3,6 +3,7 @@ import axios from "axios";
 import "./quiz.css";
 import Chart from "./chart.jsx";
 import Testing from "./Testing.jsx";
+
 function Quiz() {
   const [rowoptions, setrow] = useState([]);
   const [index, setindex] = useState(0);
@@ -15,7 +16,7 @@ function Quiz() {
   const [report, setReport] = useState(false);
   const [totalTime, setTotalTime] = useState();
   const [checkTime, setck] = useState(0);
-  const [ele , setele] = useState(69);
+  const [ele, setele] = useState(69);
 
   useEffect(() => {
     let intervalId;
@@ -107,16 +108,16 @@ function Quiz() {
     setReport(true);
   };
 
-  const clearradios = ()=>{
+  const clearradios = () => {
     var ele = document.querySelectorAll("input[type=radio]");
-    for(var i=0;i<ele.length;i++){
-       ele[i].checked = false;
+    for (var i = 0; i < ele.length; i++) {
+      ele[i].checked = false;
     }
-  }
+  };
 
   const handleNext = (index) => {
     //  console.log(result);
-    setele(ele+1);
+    setele(ele + 1);
     if (index == 0) {
       setresult((prevState) => [...prevState, Math.floor((time % 6000) / 100)]);
       setck(Math.floor((time % 6000) / 100));
@@ -132,9 +133,9 @@ function Quiz() {
     console.log(data2[index]);
     setindex(index + 1);
     var ele = document.querySelectorAll("input[type=radio]");
-   for(var i=0;i<ele.length;i++){
+    for (var i = 0; i < ele.length; i++) {
       ele[i].checked = false;
-   }
+    }
   };
   // var tt = totalTim
   if (report == false) {
@@ -160,18 +161,18 @@ function Quiz() {
                       {rowoptions.map((o, i2) => (
                         <li key={o}>
                           <input
-                          className="rado"
+                            className="rado"
                             type="radio"
                             onClick={(e) => {
                               if (e.target.value == s.tag) setcorr(corr + 1);
                             }}
-                            id={s.word+o+ele.toString()}
-                            name={s.word+o+s.tag+ele.toString()}
+                            id={s.word + o + ele.toString()}
+                            name={s.word + o + s.tag + ele.toString()}
                             value={o}
                             required
                           />
                           <label
-                            for={s.word+o+ele.toString()}
+                            for={s.word + o + ele.toString()}
                             class="items-center justify-center w-fit p-5 text-gray-500 bg-white border border-gray-200 rounded-lg"
                           >
                             <div class="block">
@@ -192,16 +193,12 @@ function Quiz() {
                   >
                     Next{" "}
                   </button>
-                  
                 )}
               </div>
             )}
-              <button
-                    className="quiz-reset"
-                    onClick={() => clearradios()}
-                  >
-                    Reset Answers
-                  </button>
+            <button className="quiz-reset" onClick={() => clearradios()}>
+              Reset Answers
+            </button>
           </div>
 
           {index == 19 && (
@@ -217,6 +214,9 @@ function Quiz() {
       <div>
         {/* <Testing/> */}
         <Chart corr2={corr} tTime={totalTime} time={result} />;
+        <button className="quiz-dash">
+          Dashboard{" "}
+        </button>
       </div>
     );
   }
