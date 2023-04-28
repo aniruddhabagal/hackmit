@@ -9,8 +9,11 @@ import "./chart.css";
 
 export var cor, tt, ts;
 
-function Chart({ corr2, tTime, time }) {
+function Chart({ corr2, tTime, time , data }) {
   console.log(corr2, time, tTime);
+  const [getanswers , setanswers] = useState(false);
+  const [index, setindex] = useState(0);
+
 
   const BarData = [
     {
@@ -205,6 +208,30 @@ function Chart({ corr2, tTime, time }) {
           <PieChart chartData={pieData} />
         </div>
       </div>
+      <div className="verify">
+      {getanswers && (
+          <div>
+            <div className="question">Q. {data[index].sentence}</div>
+            {data[index].pos.map((s, index) => (
+              <div className="word-ans" key={index}>
+                <span className="word-ques">{s.word}</span> :{" "}
+                <span className="ans-ques">{s.tag}</span>
+              </div>
+            ))}
+            {!(index == 19) && (
+          <button className="btn-nxt" onClick={() => setindex(index + 1)}>
+            NEXT{" "}
+          </button>
+        )}
+          </div>
+        )
+        
+        }
+     </div>
+    
+
+  
+     <button onClick={()=> setanswers(!getanswers)}  className="quiz-dash">Verify Answers</button>
     </div>
   );
 }

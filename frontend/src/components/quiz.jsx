@@ -20,6 +20,7 @@ function Quiz() {
   const [ele, setele] = useState(69);
   const navigate = useNavigate();
 
+  const [getanswers , setanswers] = useState(false);
 
   useEffect(() => {
     let intervalId;
@@ -221,9 +222,11 @@ function Quiz() {
     return (
       <div>
         {/* <Testing/> */}
-        <Chart corr2={corr} tTime={totalTime} time={result} />;
+        <Chart corr2={corr} tTime={totalTime} time={result} data = {data2} />;
         <button className="quiz-dash" onClick={navigateToDash}>
+
           Dashboard{" "}
+
         </button>
       </div>
     );
