@@ -1,4 +1,7 @@
 node_modules
+<<<<<<< HEAD
 .env
+=======
+>>>>>>> a4d721361e00800ff848c5b1e18fa60e9d2788e4
 132w.mp3
 sentenceAudio.mp3

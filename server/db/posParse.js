@@ -78,3 +78,17 @@ exports.removePunctuation=()=>{
     })
 }
 
+<<<<<<< HEAD
+=======
+exports.getLastId=()=>{
+    return new Promise((resolve, reject) => {
+        sentences.count()
+        .then(msg=>{
+            resolve(msg)
+        })
+        .catch(err=>{
+            reject(`failed fetch total count`)
+        })
+    })
+}
+>>>>>>> a4d721361e00800ff848c5b1e18fa60e9d2788e4

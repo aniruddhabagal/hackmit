@@ -333,11 +333,18 @@ exports.getPOSofSentc = (sentence) => {
                 var tag = taggedWord[1];
                 tag = transform(tag);
                 let pos = { word, tag }
+<<<<<<< HEAD
                 if((tag!=='punctuation mark') && (word!==`'`)) posArray.push(pos)
                 // posArray.push(pos);
 
             }
             // posArray.pop()
+=======
+                posArray.push(pos);
+
+            }
+            posArray.pop()
+>>>>>>> a4d721361e00800ff848c5b1e18fa60e9d2788e4
             resolve(posArray)
         } catch (error) {
             console.log(error)

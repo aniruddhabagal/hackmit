@@ -24,6 +24,7 @@ exports.tutorialEndpointRandom=(sizee)=>{
             reject('failed fetch random tut qs')
         })
     })
+<<<<<<< HEAD
 }
 
 exports.getLastId=()=>{
@@ -48,4 +49,6 @@ exports.getLastRecord=()=>{
             reject(`failed fetch last record`)
         })
     })
+=======
+>>>>>>> a4d721361e00800ff848c5b1e18fa60e9d2788e4
 }

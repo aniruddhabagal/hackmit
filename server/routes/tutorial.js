@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const { tutorialEndpoint, tutorialEndpointRandom, getLastId, getLastRecord } = require("../db/apiData")
+=======
+const { tutorialEndpoint, tutorialEndpointRandom } = require("../db/apiData")
+>>>>>>> a4d721361e00800ff848c5b1e18fa60e9d2788e4
 
 exports.tutorialQuestions=(req,res)=>{
     
@@ -27,6 +31,7 @@ exports.randomTutorialQuestions=(req,res)=>{
         console.log(err)
         res.send({err:true,msg:'failed fetch tut questions random'})
     })
+<<<<<<< HEAD
 }
 
 exports.lastRecordFunc=(req,res)=>{
@@ -41,4 +46,6 @@ exports.lastRecordFunc=(req,res)=>{
         console.log(err)
         res.send({err:true,msg:'failed fetch tut questions random'})
     })
+=======
+>>>>>>> a4d721361e00800ff848c5b1e18fa60e9d2788e4
 }
