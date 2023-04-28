@@ -57,7 +57,7 @@ export default function Audio() {
         </div>
 
         { loadcall && 
-        <div>
+        <div className="audio-ques">
           <div>
             <div className="question">Q. {apid.sentence}</div>
             {apid.pos.map((s, index) => (
