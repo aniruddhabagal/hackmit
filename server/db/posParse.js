@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const sentences = require('./sentenceSchema')
 
-exports.storeSentence = (id, newSentence,posArray) => {
-
+exports.storeSentence = async (id, newSentence,posArray) => {
+    const lastId=await this.getLastId();
     return new Promise((resolve, reject) => {
         const sentence = new sentences({
             lineId: id,
@@ -74,6 +74,18 @@ exports.removePunctuation=()=>{
         })
         .catch(err=>{
             reject(`Failed removeing full stop`)
+        })
+    })
+}
+
+exports.getLastId=()=>{
+    return new Promise((resolve, reject) => {
+        sentences.count()
+        .then(msg=>{
+            resolve(msg)
+        })
+        .catch(err=>{
+            reject(`failed fetch total count`)
         })
     })
 }

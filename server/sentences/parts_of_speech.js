@@ -1,5 +1,5 @@
 // const { transform } = require("./insertSentence");
-const pos=require('pos')
+const pos = require('pos')
 const GLOSSARY = {
     "ADJ": "adjective",
     "ADP": "adposition",
@@ -311,9 +311,9 @@ const GLOSSARY = {
     "GPE_LOC": "Geo-political entity, with a locative sense, e.g. 'John lives in Spain'",
     "GPE_ORG": "Geo-political entity, with an organisation sense, e.g. 'Spain declined to meet with Belgium'",
 }
-const transform=(tag)=>{
+const transform = (tag) => {
     for (const t in GLOSSARY) {
-        if(t===tag){
+        if (t === tag) {
             return GLOSSARY[tag].split(',')[0]
         }
         // return tag;
@@ -322,21 +322,26 @@ const transform=(tag)=>{
 
 exports.getPOSofSentc = (sentence) => {
     return new Promise((resolve, reject) => {
-        let words = new pos.Lexer().lex(sentence);
-        let tagger = new pos.Tagger();
-        let taggedWords = tagger.tag(words);
-        let posArray = []
-        for (i in taggedWords) {
-            var taggedWord = taggedWords[i];
-            var word = taggedWord[0];
-            var tag = taggedWord[1];
-            tag=transform(tag);
-            let pos = { word, tag }
-            posArray.push(pos);
+        try {
+            let words = new pos.Lexer().lex(sentence);
+            let tagger = new pos.Tagger();
+            let taggedWords = tagger.tag(words);
+            let posArray = []
+            for (i in taggedWords) {
+                var taggedWord = taggedWords[i];
+                var word = taggedWord[0];
+                var tag = taggedWord[1];
+                tag = transform(tag);
+                let pos = { word, tag }
+                posArray.push(pos);
 
+            }
+            posArray.pop()
+            resolve(posArray)
+        } catch (error) {
+            console.log(error)
+            reject({ err: true, msg: 'unexpected' })
         }
-        posArray.pop()
-        resolve(posArray)
     })
 
 }
