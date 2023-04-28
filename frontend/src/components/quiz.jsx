@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./quiz.css";
-import Chart from "./chart.jsx";
+import Chart from "./chart.jsx"; 
 import { useNavigate } from "react-router-dom";
 
 function Quiz() {
   const [rowoptions, setrow] = useState([]);
-  const [index, setindex] = useState(0);
+  const [index, setindex] = useState(0); 
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [result, setresult] = useState([]);
@@ -224,8 +224,7 @@ function Quiz() {
         <Chart corr2={corr} tTime={totalTime} time={result} data={data2} />;
         <button
           className="quiz-dash"
-          onClick={navigateToDash}
-          onClick={navigateToDash}
+          onClick={navigateToDash} 
         >
           Dashboard{" "}
         </button>

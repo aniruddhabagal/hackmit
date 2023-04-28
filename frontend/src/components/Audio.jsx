@@ -6,6 +6,8 @@ import "./Audio.css";
 
 export default function Audio() {
   const recorderControls = useAudioRecorder();
+  const [loadcall , setloadcall] = useState(false);
+  const [apid , setapid] =useState();
 
   function blobToBase64(blob) {
     return new Promise((resolve) => {
@@ -24,6 +26,8 @@ export default function Audio() {
         })
         .then((res) => {
           console.log(res.data);
+          setapid(res.data);
+          setloadcall(true);
         });
     });
     //   const measuredAccuracy = res.data;
@@ -51,18 +55,21 @@ export default function Audio() {
             Stop recording
           </button>
         </div>
-        {/* <TextToSpeech
-            text={words[curIndex]}
-            voiceList={[
-              { name: "English (US) Male", value: "en-US-Wavenet-A" },
-              { name: "English (US) Female", value: "en-US-Wavenet-E" },
-            ]}
-            defaultVoice="en-US-Wavenet-E"
-            secretKey="AIzaSyCqQICOuuRMjN6wxv7SCWG6N2prMmd9GpY"
-            showAudioControl={true}
-            showSettings={false}
-            type="Page"
-          ></TextToSpeech> */}
+
+        { loadcall && 
+        <div>
+          <div>
+            <div className="question">Q. {apid.sentence}</div>
+            {apid.pos.map((s, index) => (
+              <div className="word-ans" key={index}>
+                <span className="word-ques">{s.word}</span> :{" "}
+                <span className="ans-ques">{s.tag}</span>
+              </div>
+            ))}
+          </div>
+          </div>
+          }
+        
       </div>
     </div>
   );
