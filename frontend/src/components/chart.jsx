@@ -208,7 +208,7 @@ function Chart({ corr2, tTime, time , data }) {
           <PieChart chartData={pieData} />
         </div>
       </div>
-      <div>
+      <div className="verify">
       {getanswers && (
           <div>
             <div className="question">Q. {data[index].sentence}</div>
