@@ -18,3 +18,10 @@
     align-items: center;
     padding: 0 20px 0 50px;
 }
+
+.verify{
+    margin-top: 3em;
+    padding: 2em 0;
+    border-radius: 50px;
+    background-color: white;
+}
