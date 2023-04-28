@@ -320,7 +320,7 @@ const GLOSSARY = {
     "GPE_ORG": "Geo-political entity, with an organisation sense, e.g. 'Spain declined to meet with Belgium'",
 }
 
-const transform=(tag)=>{
+exports.transform=(tag)=>{
     for (const t in GLOSSARY) {
         if(t===tag){
             return GLOSSARY[tag].split(',')[0]
