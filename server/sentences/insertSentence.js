@@ -320,7 +320,7 @@ const GLOSSARY = {
     "GPE_ORG": "Geo-political entity, with an organisation sense, e.g. 'Spain declined to meet with Belgium'",
 }
 
-exports.transform=(tag)=>{
+const transform=(tag)=>{
     for (const t in GLOSSARY) {
         if(t===tag){
             return GLOSSARY[tag].split(',')[0]
@@ -356,12 +356,14 @@ exports.parseCSV = (filePath) => {
                         var tag = taggedWord[1];
                         tag=transform(tag)
                         let pos = { word, tag }
-                        posArray.push(pos);
+                        if(tag!=='punctuation mark') posArray.push(pos)
+                        // posArray.push(pos);
+                        // if(tag==='punctuation mark') posArray.pop();
 
                     }
                         // console.log('this->\n',posArray)
                         // console.log(num,sentence,posArray)
-                        posArray.pop();
+                        // posArray.pop();
                         posParse.storeSentence(num,sentence,posArray)
                     .then(msg=>{
                         console.log(msg);
