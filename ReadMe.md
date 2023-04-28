@@ -14,7 +14,8 @@
 3. `npm i --force`
 
 ## To run Back-End:
-1. `cd backend`
-2. `npm i`
-3. `nodemon`
+1. `git checkout backend`
+2. `cd backend`
+3. `npm i`
+4. `nodemon`
 
