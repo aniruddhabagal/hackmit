@@ -1,21 +1,21 @@
 ::-webkit-scrollbar {
-    width: 1px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888; 
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-  }
+  width: 1px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 
 .timer {
   position: fixed;
@@ -71,7 +71,8 @@ input {
 }
 
 .quiz-nxt,
-.quiz-sub {
+.quiz-sub,
+.quiz-reset {
   margin-top: 2em;
   letter-spacing: 2px;
   border-radius: 20px;
@@ -85,7 +86,12 @@ input {
   color: beige;
 }
 
+.quiz-reset:hover {
+  background-color: rgba(76, 31, 181);
+  color: beige;
+}
+
 .quiz-sub:hover {
-    font-weight: bold;
+  font-weight: bold;
   background-color: rgb(205, 0, 0);
 }

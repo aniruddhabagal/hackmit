@@ -2,6 +2,7 @@
 import { useState } from "react";
 import BarChart from "./barChart";
 import PieChart from "./piechart";
+import "./chart.css";
 // import { BarData } from "./Data";
 // import { PieData } from "./Data";
 
@@ -192,14 +193,16 @@ function Chart({ corr2, tTime, time }) {
 
   return (
     <div>
-      <h1>Analytics</h1>
+      <h1 className="chart-head">Analytics</h1>
 
-      <h3>Total time elapsed: {result}</h3>
-      <div style={{ width: 700 }}>
-        <BarChart chartData={barData} />
-      </div>
-      <div style={{ width: 700 }}>
-        <PieChart chartData={pieData} />
+      <h3 className="chart-time">Total time elapsed: {result}</h3>
+      <div className="chart-contain">
+        <div style={{ width: 700 }}>
+          <BarChart chartData={barData} />
+        </div>
+        <div style={{ width: 700 }}>
+          <PieChart chartData={pieData} />
+        </div>
       </div>
     </div>
   );

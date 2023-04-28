@@ -190,14 +190,14 @@ function Quiz() {
                     className="quiz-nxt"
                     onClick={() => handleNext(index)}
                   >
-                    NEXT{" "}
+                    Next{" "}
                   </button>
                   
                 )}
               </div>
             )}
               <button
-                    className="quiz-nxt"
+                    className="quiz-reset"
                     onClick={() => clearradios()}
                   >
                     Reset Answers
