@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+node_modules
+<<<<<<< HEAD
+.env
+=======
+>>>>>>> a4d721361e00800ff848c5b1e18fa60e9d2788e4
+132w.mp3
+sentenceAudio.mp3
+=======
 ._._._.git
 ._._._frontend
 ._._._ReadMe.md
@@ -7,3 +16,4 @@
 ._.git
 ._frontend
 ._ReadMe.md
+>>>>>>> e20d85fd319b3dc511d50bac987d49f834c6c459
