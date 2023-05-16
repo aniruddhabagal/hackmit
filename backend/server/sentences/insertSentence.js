@@ -356,11 +356,7 @@ exports.parseCSV = (filePath) => {
                         var tag = taggedWord[1];
                         tag=transform(tag)
                         let pos = { word, tag }
-<<<<<<< HEAD
                         if((tag!=='punctuation mark') && (word!==`'`)) posArray.push(pos)
-=======
-                        if(tag!=='punctuation mark') posArray.push(pos)
->>>>>>> a4d721361e00800ff848c5b1e18fa60e9d2788e4
                         // posArray.push(pos);
                         // if(tag==='punctuation mark') posArray.pop();
 

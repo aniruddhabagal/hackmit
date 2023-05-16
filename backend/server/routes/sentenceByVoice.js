@@ -1,17 +1,10 @@
-<<<<<<< HEAD
 const { storeSentence} = require("../db/posParse");
-=======
-const { storeSentence, getLastId } = require("../db/posParse");
->>>>>>> a4d721361e00800ff848c5b1e18fa60e9d2788e4
 const { getPOSofSentc } = require("../sentences/parts_of_speech");
 const { Configuration, OpenAIApi } = require('openai')
 const fs = require('fs')
 const multer = require('multer');
 const path = require("path");
-<<<<<<< HEAD
 const { getLastId } = require("../db/apiData");
-=======
->>>>>>> a4d721361e00800ff848c5b1e18fa60e9d2788e4
 
 const upload = multer()
 
@@ -36,11 +29,7 @@ exports.enterSentenceByVoice = async (req, res) => {
     console.log(`${req.ip} -> ${req.url}`)
     // console.log(req.body)
     let posi;
-<<<<<<< HEAD
     let lastId=await getLastId()
-=======
-    let lastId=await getLastId();
->>>>>>> a4d721361e00800ff848c5b1e18fa60e9d2788e4
     const { audio } = req.body
     if (audio) {
         fs.writeFile('sentenceAudio.mp3', audio, { encoding: 'base64' }, (err) => {
