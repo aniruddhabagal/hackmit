@@ -1,0 +1,248 @@
+.tut-container {
+  font-family: "Times New Roman", Times, serif;
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.427),
+    rgba(255, 255, 255, 0.548),
+    rgba(255, 255, 255, 0.664),
+    rgba(255, 255, 255, 0.785),
+    white
+  );
+  font-size: 61px;
+  font-weight: bold;
+  height: 92vh;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.question {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-30px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
+}
+
+.word-ans {
+  font-size: 43px;
+  font-weight: 400;
+}
+
+.word-ques {
+  color: rgb(255, 0, 128);
+}
+
+.ans-ques {
+  color: rgb(0, 85, 160);
+}
+
+.btn-nxt,
+.btn-test {
+  text-align: center;
+  padding: 20px 50px;
+  font-size: 31px;
+  letter-spacing: 2px;
+  font-weight: 400;
+  border-radius: 20px;
+  color: white;
+  background-color: rgba(36, 0, 120, 0.808);
+}
+
+.btn-nxt:hover {
+  background-color: rgba(76, 31, 181);
+  color: rgba(232, 232, 232, 0.7);
+}
+
+.btn-test:hover {
+  background-color: red;
+}
+
+
+/* ********************************** Animation *********************************/
+
+.logo-holder {
+  width: 180px;
+  height: 220px;
+  position: absolute;
+  top: 4%;
+  left: 17%;
+  margin: 0 auto;
+  padding-top: 12px;
+  padding-bottom: 24px;
+  -webkit-transform: translateZ(0);
+}
+
+.bg {
+  position: absolute;
+  top: 9px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  background: url(http://boutique.flarework.com/wp-content/themes/boutique/img/logo_large.png)
+    center 0px no-repeat;
+  background-size: contain;
+  -webkit-filter: drop-shadow(0px 6px 25px rgba(0, 0, 0, 0.5));
+}
+
+.bar {
+  position: relative;
+  height: 8px;
+  background: #6a6a6a;
+  width: 0%;
+  top: 0px;
+  left: 18px;
+  margin-top: 8px;
+  box-shadow: 0 0 3px rgba(192, 192, 192, 0.9);
+  animation: fill 5s infinite alternate, colors 5s infinite alternate;
+}
+
+.bar.fill1 {
+  animation: fill-1 5s infinite alternate, colors 5s infinite alternate;
+}
+
+.bar.fill2 {
+  animation: fill-2 5s infinite alternate, colors 5s infinite alternate;
+}
+
+.bar.fill3 {
+  animation: fill-3 5s infinite alternate, colors 5s infinite alternate;
+}
+
+.bar.fill4 {
+  animation: fill-4 5s infinite alternate, colors 5s infinite alternate;
+}
+
+.bar.fill5 {
+  animation: fill-5 5s infinite alternate, colors 5s infinite alternate;
+}
+
+.bar.fill6 {
+  animation: fill-6 5s infinite alternate, colors 5s infinite alternate;
+}
+
+@keyframes fill {
+  0% {
+    width: 0;
+  }
+  33% {
+    width: 30px;
+  }
+  66% {
+    width: 10px;
+  }
+  100% {
+    width: 105px;
+  }
+}
+
+@keyframes fill-1 {
+  0% {
+    width: 0;
+  }
+  33% {
+    width: 50px;
+  }
+  66% {
+    width: 20px;
+  }
+  100% {
+    width: 130px;
+  }
+}
+
+@keyframes fill-2 {
+  0% {
+    width: 0;
+  }
+  33% {
+    width: 90px;
+  }
+  66% {
+    width: 70px;
+  }
+  100% {
+    width: 136px;
+  }
+}
+
+@keyframes fill-3 {
+  0% {
+    width: 0;
+  }
+  33% {
+    width: 50px;
+  }
+  66% {
+    width: 24px;
+  }
+  100% {
+    width: 109px;
+  }
+}
+
+@keyframes fill-4 {
+  0% {
+    width: 0;
+  }
+  33% {
+    width: 98px;
+  }
+  66% {
+    width: 34px;
+  }
+  100% {
+    width: 99px;
+  }
+}
+
+@keyframes fill-5 {
+  0% {
+    width: 0;
+  }
+  33% {
+    width: 30px;
+  }
+  66% {
+    width: 10px;
+  }
+  100% {
+    width: 148px;
+  }
+}
+
+@keyframes fill-6 {
+  0% {
+    width: 0;
+  }
+  33% {
+    width: 48px;
+  }
+  66% {
+    width: 22px;
+  }
+  100% {
+    width: 140px;
+  }
+}
+
+@keyframes colors {
+  0% {
+    background-color: #5a5a5a;
+  }
+  50% {
+    background-color: #3a3;
+  }
+  100% {
+    background-color: #6a6a6a;
+  }
+}

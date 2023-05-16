@@ -1,0 +1,60 @@
+.logo-1 {
+  background-image: url(./img/logo.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 250px;
+  margin: auto;
+  background-size: contain;
+  height: 100px;
+}
+
+.speech-head {
+  padding-top: 50px;
+  font-size: 70px;
+  letter-spacing: 3px;
+  color: white;
+  text-shadow: 2px 2px 10px black;
+}
+
+.cards {
+  display: flex;
+  height: 63vh;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  font-size: 23px;
+}
+
+.btn-choose {
+  position: absolute;
+  top: 88%;
+  color: white;
+  background-color: rgba(76, 31, 181, 0.808);
+  border-radius: 20px;
+  position: relative;
+  font-size: 34px;
+  padding: 10px 160px;
+}
+
+.btn-choose:hover {
+  background-color: rgba(76, 31, 181);
+  font-weight: bold;
+}
+
+.tut {
+  width: 600px;
+  height: 400px;
+  background-image: url(./img/tut-img.jpg);
+  background-position: center;
+  background-size: cover;
+  border-radius: 50px;
+}
+
+.quiz {
+  background-image: url(./img/quiz-img.jpg);
+  background-position: center;
+  background-size: cover;
+  width: 600px;
+  height: 400px;
+  border-radius: 50px;
+}
