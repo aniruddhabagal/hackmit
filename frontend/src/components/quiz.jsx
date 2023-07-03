@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./quiz.css";
-import Chart from "./chart.jsx"; 
+import Chart from "./chart.jsx";
 import { useNavigate } from "react-router-dom";
 
 function Quiz() {
   const [rowoptions, setrow] = useState([]);
-  const [index, setindex] = useState(0); 
+  const [index, setindex] = useState(0);
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [result, setresult] = useState([]);
@@ -37,7 +37,7 @@ function Quiz() {
 
   const ld = async () => {
     try {
-      const res = await axios.get("http://192.168.0.135:8990/tutorial/20");
+      const res = await axios.get("http://192.168.137.149:8990/tutorial/20");
       console.log(res.data.data);
       setdata2(res.data.data);
       setload(true);
@@ -222,10 +222,7 @@ function Quiz() {
       <div>
         {/* <Testing/> */}
         <Chart corr2={corr} tTime={totalTime} time={result} data={data2} />;
-        <button
-          className="quiz-dash"
-          onClick={navigateToDash} 
-        >
+        <button className="quiz-dash" onClick={navigateToDash}>
           Dashboard{" "}
         </button>
       </div>

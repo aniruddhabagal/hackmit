@@ -6,8 +6,8 @@ import "./Audio.css";
 
 export default function Audio() {
   const recorderControls = useAudioRecorder();
-  const [loadcall , setloadcall] = useState(false);
-  const [apid , setapid] =useState();
+  const [loadcall, setloadcall] = useState(false);
+  const [apid, setapid] = useState();
 
   function blobToBase64(blob) {
     return new Promise((resolve) => {
@@ -20,7 +20,7 @@ export default function Audio() {
   const addAudioElement = async (blob) => {
     blobToBase64(blob).then((base64) => {
       axios
-        .post("http://192.168.0.135:8990/sentenceByVoice", {
+        .post("http://192.168.42.14:8990/sentenceByVoice", {
           // description: words[curIndex],
           audio: base64,
         })
@@ -56,20 +56,19 @@ export default function Audio() {
           </button>
         </div>
 
-        { loadcall && 
-        <div className="audio-ques">
-          <div>
-            <div className="question">Q. {apid.sentence}</div>
-            {apid.pos.map((s, index) => (
-              <div className="word-ans" key={index}>
-                <span className="word-ques">{s.word}</span> :{" "}
-                <span className="ans-ques">{s.tag}</span>
-              </div>
-            ))}
+        {loadcall && (
+          <div className="audio-ques">
+            <div>
+              <div className="question">Q. {apid.sentence}</div>
+              {apid.pos.map((s, index) => (
+                <div className="word-ans" key={index}>
+                  <span className="word-ques">{s.word}</span> :{" "}
+                  <span className="ans-ques">{s.tag}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          </div>
-          }
-        
+        )}
       </div>
     </div>
   );

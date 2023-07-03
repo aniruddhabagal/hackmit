@@ -150,7 +150,7 @@ function Tutorial() {
 
   const ld = async () => {
     try {
-      const res = await axios.get("http://192.168.0.135:8990/tutorial");
+      const res = await axios.get("http://10.60.209.138:8990/tutorial");
       console.log(res.data.data);
       setdata2(res.data.data);
       setload(true);
